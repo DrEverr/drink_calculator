@@ -1,16 +1,19 @@
+import 'package:drink_calculator/src/model/drink.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-class NewDrinkDialog extends StatefulWidget {
+class DrinkFormDialog extends StatefulWidget {
+  final String title;
+  final String actionTitle;
   final Function addDrink;
+  final Drink? drink;
 
-  const NewDrinkDialog(this.addDrink, {super.key});
+  const DrinkFormDialog(this.title, this.actionTitle, this.addDrink, {this.drink, super.key});
 
   @override
-  NewDrinkDialogState createState() => NewDrinkDialogState();
+  DrinkFormDialogState createState() => DrinkFormDialogState();
 }
 
-class NewDrinkDialogState extends State<NewDrinkDialog> {
+class DrinkFormDialogState extends State<DrinkFormDialog> {
   final _nameController = TextEditingController();
   final _alcoholContentController = TextEditingController();
   final _volumeController = TextEditingController();
@@ -36,8 +39,14 @@ class NewDrinkDialogState extends State<NewDrinkDialog> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.drink != null) {
+      _nameController.text = widget.drink!.name;
+      _alcoholContentController.text = widget.drink!.alcoholContent.toString();
+      _volumeController.text = widget.drink!.volume.toString();
+      _priceController.text = widget.drink!.price.toString();
+    }
     return AlertDialog(
-      title: const Text('Dodaj nowy napój'),
+      title: Text(widget.title),
       content: SingleChildScrollView(
         child: ListBody(
           children: <Widget>[
@@ -108,7 +117,7 @@ class NewDrinkDialogState extends State<NewDrinkDialog> {
         ),
         TextButton(
           onPressed: _submitData,
-          child: const Text('Dodaj'),
+          child: Text(widget.actionTitle),
         ),
       ],
     );

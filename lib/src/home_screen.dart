@@ -1,7 +1,7 @@
 import 'package:drink_calculator/src/bloc/drink_calculator_bloc.dart';
 import 'package:drink_calculator/src/model/drink.dart';
 import 'package:drink_calculator/src/widgets/drink_item.dart';
-import 'package:drink_calculator/src/widgets/new_drink.dart';
+import 'package:drink_calculator/src/widgets/drink_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +15,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Widget addDrink(BuildContext context) {
+    return DrinkFormDialog(
+      'Dodaj napój',
+      'Dodaj',
+      (name, alcoholContent, volume, price) {
+        context.read<DrinkCalculatorBloc>().add(DrinkAdd(
+          drink: Drink(
+            id: DateTime.now().millisecondsSinceEpoch,
+            name: name,
+            alcoholContent: alcoholContent,
+            volume: volume,
+            price: price,
+          ),
+        ));
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,16 +49,18 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: BlocBuilder<DrinkCalculatorBloc, DrinkCalculatorState>(
-        builder: (context, state) {
+      body: BlocConsumer<DrinkCalculatorBloc, DrinkCalculatorState>(
+        listener: (context, state) {
           if (state is DrinkFailure) {
-            return Center(
-              child: Text(
-                'Błąd: ${state.message}',
-                style: Theme.of(context).textTheme.headlineMedium,
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Theme.of(context).colorScheme.error,
               ),
             );
           }
+        },
+        builder: (context, state) {
           return ListView.builder(
             shrinkWrap: true,
             itemCount: state.drinks.length,
@@ -74,20 +94,7 @@ class _HomePageState extends State<HomePage> {
           showDialog(
             context: context,
             barrierDismissible: false,
-            builder: (context) {
-              return NewDrinkDialog(
-                (name, alcoholContent, volume, price) {
-                  context.read<DrinkCalculatorBloc>().add(DrinkAdd(
-                    drink: Drink(
-                      name: name,
-                      alcoholContent: alcoholContent,
-                      volume: volume,
-                      price: price,
-                    ),
-                  ));
-                },
-              );
-            },
+            builder: addDrink,
           );
         },
         tooltip: 'Dodaj napój',

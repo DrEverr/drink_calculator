@@ -24,8 +24,12 @@ class DrinkCalculatorBloc extends Bloc<DrinkCalculatorEvent, DrinkCalculatorStat
   }
 
   void _onDrinkUpdated(DrinkUpdate event, Emitter<DrinkCalculatorState> emit) {
-    final List<Drink> drinks = List.from(state.drinks)..remove(event.drink)..add(event.drink);
-    emit(DrinkSuccess(drinks: drinks));
+    try {
+      final List<Drink> drinks = List.from(state.drinks)..removeWhere((drink) => drink.id == event.drink.id)..add(event.drink);
+      emit(DrinkSuccess(drinks: drinks));
+    } catch (e) {
+      emit(DrinkFailure(message: e.toString(), drinks: state.drinks));
+    }
   }
 
   void _onDrinkCalculate(DrinkCalculate event, Emitter<DrinkCalculatorState> emit) {

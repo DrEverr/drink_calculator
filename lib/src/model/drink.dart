@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Drink implements Equatable {
+  final int id;
   final String name;
   final double alcoholContent;
   final double volume;
@@ -9,6 +10,7 @@ class Drink implements Equatable {
   final String priceUnit;
 
   Drink({
+    this.id = 0,
     required this.name,
     required this.alcoholContent,
     required this.volume,
@@ -28,6 +30,7 @@ class Drink implements Equatable {
     String? priceUnit,
   }) {
     return Drink(
+      id: id,
       name: name ?? this.name,
       alcoholContent: alcoholContent ?? this.alcoholContent,
       volume: volume ?? this.volume,

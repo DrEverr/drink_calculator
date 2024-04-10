@@ -1,4 +1,5 @@
 import 'package:drink_calculator/src/home_screen.dart';
+import 'package:drink_calculator/src/ui/help_screen.dart';
 import 'package:flutter/material.dart';
 
 class DrinkCalculatorApp extends StatelessWidget {
@@ -14,6 +15,14 @@ class DrinkCalculatorApp extends StatelessWidget {
       ),
       home: const HomePage(title: 'Kalulator alkoholowy'),
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: (settings) {
+        if (settings.name == '/help') {
+          return MaterialPageRoute<void>(
+            builder: (context) => const HelpScreen(title: 'Pomoc'),
+          );
+        }
+        return null;
+      },
     );
   }
 }

@@ -43,6 +43,13 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
         actions: [
           IconButton(
+            icon: const Icon(Icons.help),
+            tooltip: 'Pomoc',
+            onPressed: () {
+              Navigator.of(context).pushNamed('/help');
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.calculate),
             tooltip: 'Oblicz',
             onPressed: () {

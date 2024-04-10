@@ -1,16 +1,25 @@
-# drink_calculator
+# Drink Calculator
 
-A new Flutter project.
+## Opis
 
-## Getting Started
+Drink Calculator to aplikacja, która pomaga w obliczaniu ilości alkoholu w produkcie, za określoną cenę. Aplikacja pozwala zoptymalizować koszty napojenia alkoholowego.
 
-This project is a starting point for a Flutter application.
+## Funkcje
 
-A few resources to get you started if this is your first Flutter project:
+- Dodawanie napoju alkoholowego do listy
+- Obliczanie wartości alkoholowej w produkcie
+- Sortowanie produktów według wartości alkoholowej
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Instalacja
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Sklonuj repozytorium na swój lokalny komputer.
+2. Otwórz projekt w swoim ulubionym IDE.
+3. Uruchom aplikację na emulatorze lub fizycznym urządzeniu z systemem Android, IOS, Windows, Linux lub MacOS.
+
+## Autorzy
+
+- Marcin Sokołowski
+
+## Licencja
+
+Ten projekt jest objęty licencją MIT. Szczegółowe informacje można znaleźć w pliku [LICENSE](LICENSE).

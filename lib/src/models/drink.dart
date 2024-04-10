@@ -1,3 +1,4 @@
+import 'package:drink_calculator/src/data/database.dart';
 import 'package:equatable/equatable.dart';
 
 class Drink implements Equatable {
@@ -39,6 +40,29 @@ class Drink implements Equatable {
       volumeUnit: volumeUnit ?? this.volumeUnit,
       price: price ?? this.price,
       priceUnit: priceUnit ?? this.priceUnit,
+    );
+  }
+
+  Drink fromDrinkRow(DrinkRow drinkRow) {
+    return Drink(
+      id: drinkRow.id,
+      name: drinkRow.name,
+      alcoholContent: drinkRow.alcoholContent,
+      volume: drinkRow.volume,
+      volumeUnit: drinkRow.volumeUnit,
+      price: drinkRow.price,
+      priceUnit: drinkRow.priceUnit,
+    );
+  }
+
+  DrinkRow toDrinkRow() {
+    return DrinkRowCompanion(
+      name: name,
+      alcoholContent: alcoholContent,
+      volume: volume,
+      volumeUnit: volumeUnit,
+      price: price,
+      priceUnit: priceUnit,
     );
   }
 

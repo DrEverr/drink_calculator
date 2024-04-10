@@ -1,5 +1,5 @@
-import 'package:drink_calculator/src/bloc/drink_calculator_bloc.dart';
-import 'package:drink_calculator/src/model/drink.dart';
+import 'package:drink_calculator/src/blocs/drink_calculator_bloc.dart';
+import 'package:drink_calculator/src/models/drink.dart';
 import 'package:drink_calculator/src/widgets/drink_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

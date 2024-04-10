@@ -1,4 +1,4 @@
-import 'package:drink_calculator/src/model/drink.dart';
+import 'package:drink_calculator/src/models/drink.dart';
 import 'package:flutter/material.dart';
 
 class DrinkFormDialog extends StatefulWidget {

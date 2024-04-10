@@ -1,20 +1,23 @@
 import 'package:bloc/bloc.dart';
-import 'package:drink_calculator/src/model/drink.dart';
+import 'package:drink_calculator/src/data/database.dart';
+import 'package:drink_calculator/src/models/drink.dart';
 import 'package:equatable/equatable.dart';
 
 part 'drink_calculator_event.dart';
 part 'drink_calculator_state.dart';
 
 class DrinkCalculatorBloc extends Bloc<DrinkCalculatorEvent, DrinkCalculatorState> {
-  DrinkCalculatorBloc() : super(const DrinkInitial(drinks: [])) {
+  DrinkCalculatorBloc({required this.drinksStream}) : super(const DrinkInitial(drinks: [])) {
     on<DrinkAdd>(_onDrinkAdded);
     on<DrinkRemove>(_onDrinkRemoved);
     on<DrinkUpdate>(_onDrinkUpdated);
     on<DrinkCalculate>(_onDrinkCalculate);
   }
 
+  final Stream<List<DrinkRow>> drinksStream;
+
   void _onDrinkAdded(DrinkAdd event, Emitter<DrinkCalculatorState> emit) {
-    final List<Drink> drinks = List.from(state.drinks)..add(event.drink);
+    
     emit(DrinkSuccess(drinks: drinks));
   }
 

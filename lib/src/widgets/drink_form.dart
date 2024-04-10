@@ -19,6 +19,9 @@ class DrinkFormDialogState extends State<DrinkFormDialog> {
   final _volumeController = TextEditingController();
   final _priceController = TextEditingController();
 
+  String _volumeUnit = 'l';
+  String _priceUnit = 'zł';
+
   void _submitData() {
     final enteredName = _nameController.text;
     final enteredAlcoholContent = double.tryParse(_alcoholContentController.text);
@@ -32,7 +35,7 @@ class DrinkFormDialogState extends State<DrinkFormDialog> {
       return;
     }
 
-    widget.addDrink(enteredName, enteredAlcoholContent, enteredVolume, enteredPrice);
+    widget.addDrink(enteredName, enteredAlcoholContent, enteredVolume, _volumeUnit, enteredPrice, _priceUnit);
 
     Navigator.of(context).pop();
   }
@@ -40,6 +43,8 @@ class DrinkFormDialogState extends State<DrinkFormDialog> {
   @override
   Widget build(BuildContext context) {
     if (widget.drink != null) {
+      _volumeUnit = widget.drink!.volumeUnit;
+      _priceUnit = widget.drink!.priceUnit;
       _nameController.text = widget.drink!.name;
       _alcoholContentController.text = widget.drink!.alcoholContent.toString();
       _volumeController.text = widget.drink!.volume.toString();
@@ -51,6 +56,7 @@ class DrinkFormDialogState extends State<DrinkFormDialog> {
         child: ListBody(
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
                   width: 225.0,
@@ -78,6 +84,8 @@ class DrinkFormDialogState extends State<DrinkFormDialog> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 SizedBox(
                   width: 225.0,
@@ -88,7 +96,20 @@ class DrinkFormDialogState extends State<DrinkFormDialog> {
                     onSubmitted: (_) => _submitData(),
                   ),
                 ),
-                const Text('L'),
+                DropdownButton<String>(
+                  value: _volumeUnit,
+                  items: <String>['l', 'ml'].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      _volumeUnit = value!;
+                    });
+                  },
+                ),
               ],
             ),
             Row(

@@ -19,14 +19,16 @@ class _HomePageState extends State<HomePage> {
     return DrinkFormDialog(
       'Dodaj napój',
       'Dodaj',
-      (name, alcoholContent, volume, price) {
+      (name, alcoholContent, volume, volumeUnit, price, priceUnit) {
         context.read<DrinkCalculatorBloc>().add(DrinkAdd(
           drink: Drink(
             id: DateTime.now().millisecondsSinceEpoch,
             name: name,
             alcoholContent: alcoholContent,
             volume: volume,
+            volumeUnit: volumeUnit,
             price: price,
+            priceUnit: priceUnit,
           ),
         ));
       },

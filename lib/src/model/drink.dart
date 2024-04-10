@@ -19,7 +19,9 @@ class Drink implements Equatable {
     this.priceUnit = 'zł',
   });
 
-  double get worthIndex => (alcoholContent * volume) / price;
+  double get volumeInLiters => volumeUnit == 'ml' ? volume / 1000 : volume;
+  double get priceInZlotys => priceUnit == '€' ? price * 4.2 : price;
+  double get worthIndex => (alcoholContent * volumeInLiters) / priceInZlotys;
 
   Drink copyWith({
     String? name,

@@ -14,13 +14,15 @@ class DrinkItem extends StatelessWidget {
     return DrinkFormDialog(
       'Edytuj napój',
       'Zapisz',
-      (name, alcoholContent, volume, price) {
+      (name, alcoholContent, volume, volumeUnit, price, priceUnit) {
         context.read<DrinkCalculatorBloc>().add(DrinkUpdate(
           drink: drink.copyWith(
             name: name,
             alcoholContent: alcoholContent,
             volume: volume,
+            volumeUnit: volumeUnit,
             price: price,
+            priceUnit: priceUnit,
           ),
         ));
       },
@@ -38,7 +40,7 @@ class DrinkItem extends StatelessWidget {
       ),
       child: ListTile(
         title: Text('${drink.name} - ${drink.alcoholContent}%'),
-        subtitle: Text('${drink.volume.toString()} L - ${drink.price.toString()} zł'),
+        subtitle: Text('${drink.volume.toStringAsFixed(2)} ${drink.volumeUnit} - ${drink.price.toStringAsFixed(2)} ${drink.priceUnit}'),
         trailing: SizedBox(
           width: 150.0,
           child: Row(

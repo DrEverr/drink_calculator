@@ -39,7 +39,21 @@ class DrinkItem extends StatelessWidget {
       child: ListTile(
         title: Text('${drink.name} - ${drink.alcoholContent}%'),
         subtitle: Text('${drink.volume.toString()} L - ${drink.price.toString()} zł'),
-        trailing: trailing,
+        trailing: SizedBox(
+          width: 150.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(drink.worthIndex.toStringAsFixed(2), style: Theme.of(context).textTheme.headlineMedium,),
+              IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  context.read<DrinkCalculatorBloc>().add(DrinkRemove(drink: drink));
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

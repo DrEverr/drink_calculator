@@ -66,25 +66,7 @@ class _HomePageState extends State<HomePage> {
             itemCount: state.drinks.length,
             itemBuilder: (context, index) {
               final drink = state.drinks[index];
-              return DrinkItem(
-                drink: drink,
-                trailing: 
-                SizedBox(
-                  width: 150.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(drink.worthIndex.toStringAsFixed(2), style: Theme.of(context).textTheme.headlineMedium,),
-                      IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () {
-                          context.read<DrinkCalculatorBloc>().add(DrinkRemove(drink: drink));
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              );
+              return DrinkItem(drink: drink);
             },
           );
         },

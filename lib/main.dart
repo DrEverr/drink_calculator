@@ -1,18 +1,19 @@
 import 'dart:developer';
 
-import 'package:drink_calculator/src/bloc/drink_calculator_bloc.dart';
+import 'package:drink_calculator/src/blocs/drink_calculator_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'app.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   runApp(
-    BlocProvider(
-      create: (context) => DrinkCalculatorBloc(),
+    BlocProvider<DrinkCalculatorBloc>(
+      create: (context) => DrinkCalculatorBloc()..add(const DrinkInit()),
       child: const DrinkCalculatorApp(),
-    )
+    ),
   );
 }
 

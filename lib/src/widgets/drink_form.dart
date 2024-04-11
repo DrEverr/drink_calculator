@@ -19,8 +19,8 @@ class DrinkFormDialogState extends State<DrinkFormDialog> {
   final _volumeController = TextEditingController();
   final _priceController = TextEditingController();
 
-  String _volumeUnit = 'l';
-  String _priceUnit = 'zł';
+  String _volumeUnit = '';
+  String _priceUnit = '';
 
   void _submitData() {
     final enteredName = _nameController.text;
@@ -39,17 +39,30 @@ class DrinkFormDialogState extends State<DrinkFormDialog> {
 
     Navigator.of(context).pop();
   }
+  
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _alcoholContentController.dispose();
+    _volumeController.dispose();
+    _priceController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     if (widget.drink != null) {
-      _volumeUnit = widget.drink!.volumeUnit;
-      _priceUnit = widget.drink!.priceUnit;
+      if (_volumeUnit.isEmpty) _volumeUnit = widget.drink!.volumeUnit;
+      if (_priceUnit.isEmpty) _priceUnit = widget.drink!.priceUnit;
       _nameController.text = widget.drink!.name;
       _alcoholContentController.text = widget.drink!.alcoholContent.toString();
       _volumeController.text = widget.drink!.volume.toString();
       _priceController.text = widget.drink!.price.toString();
     }
+
+    if (_volumeUnit.isEmpty) _volumeUnit = 'l';
+    if (_priceUnit.isEmpty) _priceUnit = 'zł';
+
     return AlertDialog(
       title: Text(widget.title),
       content: SingleChildScrollView(

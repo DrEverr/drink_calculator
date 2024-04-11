@@ -23,3 +23,9 @@ Drink Calculator to aplikacja, która pomaga w obliczaniu ilości alkoholu w pro
 ## Licencja
 
 Ten projekt jest objęty licencją MIT. Szczegółowe informacje można znaleźć w pliku [LICENSE](LICENSE).
+
+![image](https://github.com/DrEverr/drink_calculator/assets/31826096/c63ce699-9b8e-47ee-af44-b8a40c170621)
+
+![image](https://github.com/DrEverr/drink_calculator/assets/31826096/81b2fb2c-5b08-445d-aaeb-ecd844e684c5)
+
+![image](https://github.com/DrEverr/drink_calculator/assets/31826096/035fe4b8-e0ed-4f97-8b19-67d3f872f80e)

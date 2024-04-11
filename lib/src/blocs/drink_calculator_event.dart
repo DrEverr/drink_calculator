@@ -7,6 +7,10 @@ sealed class DrinkCalculatorEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class DrinkInit extends DrinkCalculatorEvent {
+  const DrinkInit();
+}
+
 class DrinkAdd extends DrinkCalculatorEvent {
   final Drink drink;
 
@@ -27,4 +31,12 @@ class DrinkUpdate extends DrinkCalculatorEvent {
 
 class DrinkCalculate extends DrinkCalculatorEvent {
   const DrinkCalculate();
+}
+
+class DrinkClear extends DrinkCalculatorEvent {
+  const DrinkClear();
+}
+
+class DrinkShow extends DrinkCalculatorEvent {
+  const DrinkShow();
 }

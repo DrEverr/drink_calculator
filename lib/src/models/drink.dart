@@ -1,4 +1,5 @@
-import 'package:drink_calculator/src/data/database.dart';
+import 'package:drift/drift.dart';
+import 'package:drink_calculator/src/data/providers/database.dart';
 import 'package:equatable/equatable.dart';
 
 class Drink implements Equatable {
@@ -43,20 +44,21 @@ class Drink implements Equatable {
     );
   }
 
-  Drink fromDrinkRow(DrinkRow drinkRow) {
+  factory Drink.fromData(DrinkRow row) {
     return Drink(
-      id: drinkRow.id,
-      name: drinkRow.name,
-      alcoholContent: drinkRow.alcoholContent,
-      volume: drinkRow.volume,
-      volumeUnit: drinkRow.volumeUnit,
-      price: drinkRow.price,
-      priceUnit: drinkRow.priceUnit,
+      id: row.id,
+      name: row.name,
+      alcoholContent: row.alcoholContent,
+      volume: row.volume,
+      volumeUnit: row.volumeUnit,
+      price: row.price,
+      priceUnit: row.priceUnit,
     );
   }
 
-  DrinkRow toDrinkRow() {
-    return DrinkRowCompanion(
+  DrinksCompanion toCompanion() {
+    return DrinksCompanion.insert(
+      id: Value(id),
       name: name,
       alcoholContent: alcoholContent,
       volume: volume,

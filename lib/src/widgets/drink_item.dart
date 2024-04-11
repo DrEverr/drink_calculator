@@ -7,8 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DrinkItem extends StatelessWidget {
   final Drink drink;
   final Widget? trailing;
+  final Color? tileColor;
 
-  const DrinkItem({super.key, required this.drink, this.trailing});
+  const DrinkItem({super.key, required this.drink, this.trailing, this.tileColor});
 
   Widget editDrink(BuildContext context) {
     return DrinkFormDialog(
@@ -39,14 +40,21 @@ class DrinkItem extends StatelessWidget {
         builder: editDrink,
       ),
       child: ListTile(
-        title: Text('${drink.name} - ${drink.alcoholContent}%'),
+        tileColor: tileColor,
+        title: Text(
+          '${drink.name} - ${drink.alcoholContent}%',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
         subtitle: Text('${drink.volume.toStringAsFixed(2)} ${drink.volumeUnit} - ${drink.price.toStringAsFixed(2)} ${drink.priceUnit}'),
         trailing: SizedBox(
           width: 150.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(drink.worthIndex.toStringAsFixed(2), style: Theme.of(context).textTheme.headlineMedium,),
+              Text(
+                drink.worthIndex.toStringAsFixed(2),
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               IconButton(
                 icon: const Icon(Icons.delete),
                 onPressed: () {

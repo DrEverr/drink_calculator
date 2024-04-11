@@ -70,13 +70,54 @@ class _HomePageState extends State<HomePage> {
           }
         },
         builder: (context, state) {
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: state.drinks.length,
-            itemBuilder: (context, index) {
-              final drink = state.drinks[index];
-              return DrinkItem(drink: drink);
-            },
+          if (state is DrinkLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Napoje: ${state.drinks.length}',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Wartość',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete_forever),
+                          color: Theme.of(context).colorScheme.error,
+                          iconSize: 32.0,
+                          tooltip: 'Wyczyść',
+                          onPressed: () {
+                            BlocProvider.of<DrinkCalculatorBloc>(context).add(const DrinkClear());
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Expanded (
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.drinks.length,
+                  itemBuilder: (context, index) {
+                    final drink = state.drinks[index];
+                    return DrinkItem(drink: drink, tileColor: index.isEven ? Theme.of(context).colorScheme.secondary.withAlpha(0x10) : null);
+                  },
+                ),
+              ),
+            ],
           );
         },
       ),

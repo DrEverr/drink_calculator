@@ -377,6 +377,7 @@ class DrinksCompanion extends UpdateCompanion<DrinkRow> {
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $DrinksTable drinks = $DrinksTable(this);
+  late final DrinksDao drinksDao = DrinksDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();

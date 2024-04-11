@@ -20,4 +20,5 @@ class DrinksDao extends DatabaseAccessor<AppDatabase> with _$DrinksDaoMixin {
   Future<int> insertDrink(Insertable<DrinkRow> drink) => into(drinks).insert(drink);
   Future updateDrink(Insertable<DrinkRow> drink) => update(drinks).replace(drink);
   Future deleteDrink(Insertable<DrinkRow> drink) => delete(drinks).delete(drink);
+  Future deleteAllDrinks() => delete(drinks).go();
 }

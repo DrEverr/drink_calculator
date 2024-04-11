@@ -11,7 +11,7 @@ void main() {
   Bloc.observer = MyBlocObserver();
   runApp(
     BlocProvider<DrinkCalculatorBloc>(
-      create: (context) => DrinkCalculatorBloc(),
+      create: (context) => DrinkCalculatorBloc()..add(const DrinkInit()),
       child: const DrinkCalculatorApp(),
     ),
   );

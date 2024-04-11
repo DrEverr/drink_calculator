@@ -11,13 +11,25 @@ part 'drinks_table.dart';
 
 part 'database.g.dart';
 
-@DriftDatabase(tables: [Drinks])
+@DriftDatabase(tables: [Drinks], daos: [DrinksDao])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
   static final AppDatabase instance = AppDatabase();
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 3;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+    onCreate: (migrator) async {
+      await migrator.createAll();
+    },
+    onUpgrade: (migrator, from, to) async {
+      if (from < 3) {
+        await migrator.createTable(drinks);
+      }
+    },
+  );
 }
 
 LazyDatabase _openConnection() {

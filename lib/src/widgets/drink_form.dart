@@ -29,7 +29,7 @@ class DrinkFormDialogState extends State<DrinkFormDialog> {
     final enteredPrice = double.tryParse(_priceController.text);
 
     if (enteredName.isEmpty || 
-    enteredAlcoholContent == null || enteredAlcoholContent <= 0 || 
+    enteredAlcoholContent == null || enteredAlcoholContent < 0 || 
     enteredVolume == null || enteredVolume <= 0 || 
     enteredPrice == null || enteredPrice <= 0) {
       return;
